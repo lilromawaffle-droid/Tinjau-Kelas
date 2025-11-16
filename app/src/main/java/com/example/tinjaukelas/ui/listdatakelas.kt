@@ -32,13 +32,13 @@ class listdatakelas : Fragment() {
         val rv = view.findViewById<RecyclerView>(R.id.rvClass)
 
         val dummyData = listOf(
-            ClassRoom("A.1.1", "Available"),
-            ClassRoom("A.2.1", "Used"),
-            ClassRoom("B.1.1", "Available"),
-            ClassRoom("C.1.1", "Available"),
-            ClassRoom("C.2.1", "Used"),
-            ClassRoom("C.3.2", "Available"),
-            ClassRoom("D.1.1", "Available")
+            ClassRoom("A.1.1", "RPL", aktif = "Available"),
+            ClassRoom("A.2.1", "RPL", aktif = "Used"),
+            ClassRoom("B.1.1", "TITL", aktif = "Available"),
+            ClassRoom("C.1.1", "DKV", aktif = "Available" ),
+            ClassRoom("C.2.1", "DKV", aktif = "Used"),
+            ClassRoom("C.3.2", "TKJ", "Available"),
+            ClassRoom("D.1.1", "TAV", aktif = "Available")
         )
 
         adapter = ClassAdapter(dummyData)

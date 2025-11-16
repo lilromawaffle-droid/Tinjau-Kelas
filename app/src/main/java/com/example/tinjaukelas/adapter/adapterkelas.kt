@@ -30,13 +30,16 @@ class ClassAdapter(private val classList: List<ClassRoom>) :
 override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
         val classroom = classList[position]
 
-        holder.tvRoomName.text = classroom.name
-        holder.tvStatus.text = if (classroom.isEmpty) "Empty" else "Occupied"
+        holder.tvRoomName.text = classroom.nama
+
+        val isEmpty = classroom.aktif.equals("N", ignoreCase = true)
+
+        holder.tvStatus.text = if (isEmpty) "Empty" else "Occupied"
 
         holder.tvStatus.setTextColor(
             ContextCompat.getColor(
                 holder.itemView.context,
-                if (classroom.isEmpty) android.R.color.holo_green_dark else android.R.color.holo_red_dark
+                if (isEmpty) android.R.color.holo_green_dark else android.R.color.holo_red_dark
             )
         )
     }
@@ -47,7 +50,7 @@ override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
             classList
         } else {
             classList.filter {
-                it.name.contains(query, ignoreCase = true)
+                it.nama.contains(query, ignoreCase = true)
             }
         }
 
