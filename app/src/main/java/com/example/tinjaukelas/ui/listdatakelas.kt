@@ -8,14 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import kotlin.collections.filter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tinjaukelas.R
 import com.example.tinjaukelas.adapter.ClassAdapter
 import com.example.tinjaukelas.model.ClassRoom
 
-class ListClassFragment : Fragment() {
+class listdatakelas : Fragment() {
 
     private lateinit var adapter: ClassAdapter
 
