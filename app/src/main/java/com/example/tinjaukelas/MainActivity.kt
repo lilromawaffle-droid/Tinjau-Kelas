@@ -1,20 +1,25 @@
 package com.example.tinjaukelas
 
-import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.os.Bundle
+import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(R.layout.homepage)
+
+        val btnMasuk = findViewById<Button>(R.id.masukkelas)
+        val btnCheck = findViewById<Button>(R.id.checkkelas)
+
+        val namaKelas = "XII RPL 1" // contoh, bisa diganti nanti
+
+        btnMasuk.setOnClickListener {
+            btnMasuk.text = "Anda sedang berada dalam ruangan: $namaKelas"
+            btnMasuk.setBackgroundColor(Color.parseColor("#4CAF50")) // hijau
+            btnMasuk.setTextColor(Color.WHITE)
         }
     }
 }
