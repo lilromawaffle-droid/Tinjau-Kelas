@@ -13,7 +13,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:layout_marginBottom="290dp" />
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:id="@+id/masukkelas"
@@ -31,6 +31,13 @@
         android:layout_gravity="center"
         android:text="CHECK KELAS"
         android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+    <!-- Wadah fragment tempat listkelas muncul -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/frameContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
