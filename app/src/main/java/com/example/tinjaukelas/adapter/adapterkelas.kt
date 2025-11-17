@@ -34,14 +34,14 @@ override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
         holder.tvRoomName.text = classroom.nama
         holder.tvJurusan.text = classroom.jurusan
 
-        val isEmpty = classroom.aktif.equals("N", ignoreCase = true)
+        val isAvailable = classroom.aktif.equals("Available", ignoreCase = true)
 
-        holder.tvStatus.text = if (isEmpty) "Empty" else "Occupied"
+        holder.tvStatus.text = classroom.aktif
 
         holder.tvStatus.setTextColor(
             ContextCompat.getColor(
                 holder.itemView.context,
-                if (isEmpty) android.R.color.holo_green_dark else android.R.color.holo_red_dark
+                if (isAvailable) android.R.color.holo_green_dark else android.R.color.holo_red_dark
             )
         )
     }
