@@ -16,6 +16,7 @@ class ClassAdapter(private val classList: List<ClassRoom>) :
 
     inner class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvRoomName: TextView = itemView.findViewById(R.id.tvRoomName)
+        val tvJurusan: TextView = itemView.findViewById(R.id.tvJurusan)
         val tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
     }
 
@@ -31,6 +32,7 @@ override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
         val classroom = classList[position]
 
         holder.tvRoomName.text = classroom.nama
+        holder.tvJurusan.text = classroom.jurusan
 
         val isEmpty = classroom.aktif.equals("N", ignoreCase = true)
 
