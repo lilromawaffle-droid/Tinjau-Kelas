@@ -26,10 +26,10 @@ class ClassAdapter(private val classList: List<ClassRoom>) :
         return ClassViewHolder(view)
     }
 
-    override fun getItemCount(): Int = classList.size
+    override fun getItemCount(): Int = filteredList.size
 
 override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
-        val classroom = classList[position]
+        val classroom = filteredList[position]
 
         holder.tvRoomName.text = classroom.nama
         holder.tvJurusan.text = classroom.jurusan
