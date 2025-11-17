@@ -52,7 +52,7 @@ class LoginPage : AppCompatActivity() {
     }
 
     private fun performLogin(email: String, password: String) {
-        if (email == "admin@example.com" && password == "123456") {
+        if (email == "admin@gmail.com" && password == "123456") {
             Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
