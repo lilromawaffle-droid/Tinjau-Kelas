@@ -10,8 +10,8 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tinjaukelas.R
 import com.example.tinjaukelas.adapter.ClassAdapter
+import com.example.tinjaukelas.R
 import com.example.tinjaukelas.model.ClassRoom
 
 class listdatakelas : Fragment() {
@@ -25,6 +25,8 @@ class listdatakelas : Fragment() {
         return inflater.inflate(R.layout.listkelas, container, false)
     }
 
+    lateinit var selectedRoom: ClassRoom
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -35,13 +37,16 @@ class listdatakelas : Fragment() {
             ClassRoom("A.1.1", "RPL", aktif = "Available"),
             ClassRoom("A.2.1", "RPL", aktif = "Used"),
             ClassRoom("B.1.1", "TITL", aktif = "Available"),
-            ClassRoom("C.1.1", "DKV", aktif = "Available" ),
+            ClassRoom("C.1.1", "DKV", aktif = "Available"),
             ClassRoom("C.2.1", "DKV", aktif = "Used"),
             ClassRoom("C.3.2", "TKJ", "Available"),
             ClassRoom("D.1.1", "TAV", aktif = "Available")
         )
 
-        adapter = ClassAdapter(dummyData)
+        adapter = ClassAdapter(dummyData) { room ->
+            selectedRoom = room
+            print("kamu memilih kelas: ${room.nama}")
+        }
         rv.layoutManager = LinearLayoutManager(requireContext())
         rv.adapter = adapter
 
@@ -56,4 +61,3 @@ class listdatakelas : Fragment() {
         })
     }
 }
-

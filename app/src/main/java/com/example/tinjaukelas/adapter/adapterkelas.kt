@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tinjaukelas.R
 import com.example.tinjaukelas.model.ClassRoom
 
-class ClassAdapter(private val classList: List<ClassRoom>) :
-    RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
+class ClassAdapter(
+    private val classList: List<ClassRoom>,
+    private val onItemClick: (ClassRoom) -> Unit
+) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
 
     private var filteredList: List<ClassRoom> = classList
 
@@ -37,6 +39,10 @@ override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
         val isAvailable = classroom.aktif.equals("Available", ignoreCase = true)
 
         holder.tvStatus.text = classroom.aktif
+
+        holder.itemView.setOnClickListener {
+            onItemClick (classroom)
+        }
 
         holder.tvStatus.setTextColor(
             ContextCompat.getColor(
