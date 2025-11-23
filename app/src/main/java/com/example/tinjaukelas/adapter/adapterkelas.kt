@@ -14,6 +14,8 @@ class ClassAdapter(
     private val onItemClick: (ClassRoom) -> Unit
 ) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
 
+    var selectedRoom: ClassRoom? = null
+
     private var filteredList: List<ClassRoom> = classList
 
     inner class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,6 +23,8 @@ class ClassAdapter(
         val tvJurusan: TextView = itemView.findViewById(R.id.tvJurusan)
         val tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -35,10 +39,11 @@ override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
 
         holder.tvRoomName.text = classroom.nama
         holder.tvJurusan.text = classroom.jurusan
+        holder.tvStatus.text = classroom.aktif
 
+        val isSelected = classroom == selectedRoom
         val isAvailable = classroom.aktif.equals("Available", ignoreCase = true)
 
-        holder.tvStatus.text = classroom.aktif
 
         holder.itemView.setOnClickListener {
             onItemClick (classroom)
@@ -50,6 +55,17 @@ override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
                 if (isAvailable) android.R.color.holo_green_dark else android.R.color.holo_red_dark
             )
         )
+
+        holder.itemView.isEnabled = isAvailable && selectedRoom == null || isSelected
+        holder.itemView.alpha = if (isAvailable && (selectedRoom == null || isSelected)) 1.0f else 0.3f
+
+        holder.itemView.setOnClickListener {
+            if(isAvailable && selectedRoom == null) {
+                selectedRoom = classroom
+                onItemClick (classroom)
+                notifyDataSetChanged()
+            }
+        }
     }
 
 

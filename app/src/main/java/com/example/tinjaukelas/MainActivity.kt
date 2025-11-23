@@ -4,9 +4,17 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
+import com.example.tinjaukelas.model.ClassRoom
 import com.example.tinjaukelas.ui.listdatakelas
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), listdatakelas.OnClassSelectedListener {
+
+    var selectedRoom: ClassRoom? = null
+
+    override fun onClassSelected(classRoom: ClassRoom) {
+        selectedRoom = classRoom
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,15 +23,17 @@ class MainActivity : AppCompatActivity() {
         val btnMasuk = findViewById<Button>(R.id.masukkelas)
         val btnCheck = findViewById<Button>(R.id.checkkelas)
 
-        val namaKelas = "XII RPL 1"
+
 
         // Tombol MASUK KELAS
         btnMasuk.setOnClickListener {
-            btnMasuk.text = "Anda sedang berada dalam ruangan: $namaKelas"
-            btnMasuk.setBackgroundColor(Color.parseColor("#4CAF50"))
-            btnMasuk.setTextColor(Color.WHITE)
+            selectedRoom?.let { room ->
+                btnMasuk.text =
+                    "Kamu memilih kelas: ${room.nama} (${room.jurusan})"
+            } ?: run {
+                btnMasuk.text = "Belum memilih kelas"
+            }
         }
-
         // Tombol CHECK KELAS
         btnCheck.setOnClickListener {
             supportFragmentManager.beginTransaction()
