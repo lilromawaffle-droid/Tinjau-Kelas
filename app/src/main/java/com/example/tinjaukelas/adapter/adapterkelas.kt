@@ -16,6 +16,10 @@ class ClassAdapter(
 
     private var filteredList: List<ClassRoom> = classList
 
+    // filter state
+    private var jurusanFilter: String = "Semua"
+    private var namaFilter: String = ""
+
     inner class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvRoomName: TextView = itemView.findViewById(R.id.tvRoomName)
         val tvJurusan: TextView = itemView.findViewById(R.id.tvJurusan)
@@ -30,18 +34,17 @@ class ClassAdapter(
 
     override fun getItemCount(): Int = filteredList.size
 
-override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
         val classroom = filteredList[position]
 
         holder.tvRoomName.text = classroom.nama
         holder.tvJurusan.text = classroom.jurusan
 
         val isAvailable = classroom.aktif.equals("Available", ignoreCase = true)
-
         holder.tvStatus.text = classroom.aktif
 
         holder.itemView.setOnClickListener {
-            onItemClick (classroom)
+            onItemClick(classroom)
         }
 
         holder.tvStatus.setTextColor(
@@ -52,18 +55,38 @@ override fun onBindViewHolder(holder: ClassViewHolder, position: Int) {
         )
     }
 
+    // -----------------------------
+    // FILTER NAMA
+    // -----------------------------
+    fun filterNama(query: String) {
+        namaFilter = query
+        applyFilters()
+    }
 
-    fun filter(query: String) {
-        filteredList = if (query.isEmpty()) {
-            classList
-        } else {
-            classList.filter {
-                it.nama.contains(query, ignoreCase = true)
-            }
+    // -----------------------------
+    // FILTER JURUSAN
+    // -----------------------------
+    fun filterJurusan(jurusan: String) {
+        jurusanFilter = jurusan
+        applyFilters()
+    }
+
+    // -----------------------------
+    // GABUNGKAN FILTER
+    // -----------------------------
+    private fun applyFilters() {
+        filteredList = classList.filter { kelas ->
+
+            val cocokJurusan =
+                (jurusanFilter == "Semua" ||
+                        kelas.jurusan.equals(jurusanFilter, ignoreCase = true))
+
+            val cocokNama =
+                kelas.nama.contains(namaFilter, ignoreCase = true)
+
+            cocokJurusan && cocokNama
         }
 
         notifyDataSetChanged()
     }
 }
-
-
